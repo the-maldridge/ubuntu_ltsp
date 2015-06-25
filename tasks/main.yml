@@ -1,0 +1,18 @@
+---
+- name: Install necessary packages
+  apt: pkg={{ item }} state=present
+  with_items:
+  - ltsp-server
+  - tftpd-hpa
+  - ldm
+  - ldm-server
+
+- name: Install graphical environments
+  apt: pkg={{ item }} state=present
+  with_items: "{{ gfx_envs }}"
+
+- name: Build ltsp client image
+  command: ltsp-build-client --arch i386
+
+- name: Configure tftpd-hpa
+  copy: src=tftpd-hpa dest=/etc/default/tftpd-hpa owner=root group=root mode=0644
