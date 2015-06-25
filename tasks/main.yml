@@ -11,8 +11,11 @@
   apt: pkg={{ item }} state=present
   with_items: "{{ gfx_envs }}"
 
-- name: Build ltsp client image
-  command: ltsp-build-client --arch i386
+# - name: Build ltsp client image
+#   command: ltsp-build-client --arch i386
 
 - name: Configure tftpd-hpa
   copy: src=tftpd-hpa dest=/etc/default/tftpd-hpa owner=root group=root mode=0644
+
+- name: Configure openbsd-inetd
+  lineinfile: line="tftp dgram udp4 wait root /usr/sbin/in.tftpd /usr/sbin/in.tftpd -s /var/lib/tftpboot" state=present dest=/etc/inetd.conf insertafter=EOF
