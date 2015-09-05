@@ -10,5 +10,10 @@
   apt: pkg={{ item }} state=present
   with_items: "{{ gfx_envs }}"
 
+- name: Check for image file
+  stat: path=/opt/ltsp/i386
+  register: image
+  
 - name: Build ltsp client image
   command: ltsp-build-client --arch i386
+  when: image.stat.exists == False
