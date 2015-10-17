@@ -11,11 +11,11 @@
   register: image
   
 - name: Build ltsp client image
-  debug: msg="Initial image will be built"
+  command: /bin/true
   notify: ltsp-image-initial
   when: image.stat.exists == False
 
 - name: Update lstp client image
-  debug: msg="Existing image will be updated"
+  command: /bin/true
   notify: ltsp-image-update
   when: image.stat.exists == True

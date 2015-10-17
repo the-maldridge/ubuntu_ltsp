@@ -1,6 +1,6 @@
 ---
 - name: ltsp-image-initial
-  command: ltsp-build-client --arch i386
+  command: ltsp-build-client
 
 - name: ltsp-image-update
-  script: update.sh
+  command: ltsp-update-image
