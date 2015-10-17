@@ -11,5 +11,11 @@
   register: image
   
 - name: Build ltsp client image
-  command: ltsp-build-client --arch i386
+  debug: msg="Initial image will be built"
+  notify: ltsp-image-initial
   when: image.stat.exists == False
+
+- name: Update lstp client image
+  debug: msg="Existing image will be updated"
+  notify: ltsp-image-update
+  when: image.stat.exists == True
