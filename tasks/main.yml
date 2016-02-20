@@ -1,8 +1,12 @@
 ---
+- name: Add greek repo
+  apt_repository: repo=ppa:ts.sch.gr state=present update_cache=yes
+
 - name: Install necessary packages
   apt: pkg={{ item }} state=present
   with_items:
   - ltsp-server
+  - ltsp-client
   - ldm
   - ldm-server
 
